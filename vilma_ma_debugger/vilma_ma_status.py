@@ -11,7 +11,10 @@ class VilmaMaStatus(Node):
     def __init__(self):
         super().__init__('vilma_ma_status')
         
-        timer_period = 0.3
+        self.declare_parameter('update_period', 0.3)
+        
+        timer_period = self.get_parameter('update_period').value
+        
         self.timer = self.create_timer(timer_period, self.timer_callback)
         
         self.sensors_ma_sub_ = self.create_subscription(

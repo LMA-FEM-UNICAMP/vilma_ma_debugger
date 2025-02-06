@@ -1,3 +1,15 @@
+
+#   ******************************************************************************
+#   * @file    parse_topics_in_table.py
+#   * @brief   This file contains the functions and constants, to extract and
+#   *          parse the topics data in a table.
+#   ******************************************************************************
+#   * @author  Gabriel Toffanetto França da Rocha 
+#   *          Laboratory of Autonomous Vehicles (LMA) - FEM/Unicamp
+#   * @date    Created:  February 06, 2025
+#   *          Modified: February 06, 2025
+#   ******************************************************************************
+
 from rich.console import Console
 from rich.table import Table
 from rich.text import Text

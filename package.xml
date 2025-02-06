@@ -3,7 +3,7 @@
 <package format="3">
   <name>vilma_ma_debugger</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Package designed for VILMA, to read the viilma_ma_ros topics and parses it in a table.</description>
   <maintainer email="gabrieltoffanetto@gmail.com">toffanetto</maintainer>
   <license>Apache-2.0</license>
 

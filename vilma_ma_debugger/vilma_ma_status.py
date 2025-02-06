@@ -1,3 +1,18 @@
+
+#   ******************************************************************************
+#   * @file    vilma_ma_status.py
+#   * @brief   This file contains the vilma_ma_status node class, that read the
+#   *          vilma_ma_ros topics and parses it in a table.
+#   ******************************************************************************
+#   * @author  Gabriel Toffanetto França da Rocha 
+#   *          Laboratory of Autonomous Vehicles (LMA) - FEM/Unicamp
+#   * @date    Created:  February 06, 2025
+#   *          Modified: February 06, 2025
+#   ******************************************************************************
+
+ 
+
+
 import rclpy
 from rclpy.node import Node
 

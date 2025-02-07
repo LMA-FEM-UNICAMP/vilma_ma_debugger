@@ -160,25 +160,25 @@ def get_joystick_rows(joy):
         
         if(2 == i):
             try:
-                joy_value = joystick_ma_brake_modes[joy[i]]
+                joy_value = joystick_ma_brake_modes[int(joy[i])]
             except:
                 joy_value = '--'
             
         elif(4 == i):
             try:
-                joy_value = joystick_ma_steer_modes[joy[i]]
+                joy_value = joystick_ma_steer_modes[int(joy[i])]
             except:
                 joy_value = '--'
             
         elif(6 == i):
             try:
-                joy_value = joystick_ma_gas_modes[joy[i]]
+                joy_value = joystick_ma_gas_modes[int(joy[i])]
             except:
                 joy_value = '--'
             
         elif(8 == i):
             try:
-                joy_value = joystick_ma_gear_modes[joy[i]]
+                joy_value = joystick_ma_gear_modes[int(joy[i])]
             except:
                 joy_value = '--'
             

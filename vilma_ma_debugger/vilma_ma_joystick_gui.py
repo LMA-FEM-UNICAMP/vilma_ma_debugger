@@ -76,7 +76,7 @@ class VilmaMaJoystickGui(Node):
         self.steer_modes_label.grid(row=0, column=2)
         self.steer_modes_var = tk.StringVar()
         self.steer_modes_var.set(self.steer_modes[0])
-        self.steer_modes_dropdown = ttk.OptionMenu(self.frame, self.steer_modes_var, *self.steer_modes, 
+        self.steer_modes_dropdown = ttk.OptionMenu(self.frame, self.steer_modes_var, self.steer_modes[0], *self.steer_modes, 
                                               command=lambda value, v=self.steer_modes_var, name=f"steer_modes": self.on_dropdown_change(v, name))
         self.steer_modes_dropdown.grid(row=0, column=3)
 
@@ -85,7 +85,7 @@ class VilmaMaJoystickGui(Node):
         self.gas_modes_label.grid(row=1, column=2)
         self.gas_modes_var = tk.StringVar()
         self.gas_modes_var.set(self.gas_modes[0])
-        self.gas_modes_dropdown = ttk.OptionMenu(self.frame, self.gas_modes_var, *self.gas_modes, 
+        self.gas_modes_dropdown = ttk.OptionMenu(self.frame, self.gas_modes_var, self.gas_modes[0], *self.gas_modes, 
                                             command=lambda value, v=self.gas_modes_var, name=f"gas_modes": self.on_dropdown_change(v, name))
         self.gas_modes_dropdown.grid(row=1, column=3)
 
@@ -94,7 +94,7 @@ class VilmaMaJoystickGui(Node):
         self.brake_modes_label.grid(row=2, column=2)
         self.brake_modes_var = tk.StringVar()
         self.brake_modes_var.set(self.brake_modes[0])
-        self.brake_modes_dropdown = ttk.OptionMenu(self.frame, self.brake_modes_var, *self.brake_modes, 
+        self.brake_modes_dropdown = ttk.OptionMenu(self.frame, self.brake_modes_var, self.brake_modes[0], *self.brake_modes, 
                                               command=lambda value, v=self.brake_modes_var, name=f"brake_modes": self.on_dropdown_change(v, name))
         self.brake_modes_dropdown.grid(row=2, column=3)
 
@@ -103,7 +103,7 @@ class VilmaMaJoystickGui(Node):
         self.gear_modes_label.grid(row=3, column=2)
         self.gear_modes_var = tk.StringVar()
         self.gear_modes_var.set(self.gear_modes[0])
-        self.gear_modes_dropdown = ttk.OptionMenu(self.frame, self.gear_modes_var, *self.gear_modes, 
+        self.gear_modes_dropdown = ttk.OptionMenu(self.frame, self.gear_modes_var, self.gear_modes[0], *self.gear_modes, 
                                              command=lambda value, v=self.gear_modes_var, name=f"gear_modes": self.on_dropdown_change(v, name))
         self.gear_modes_dropdown.grid(row=3, column=3)
 
@@ -112,7 +112,7 @@ class VilmaMaJoystickGui(Node):
         self.gear_value_label.grid(row=4, column=2)
         self.gear_value_var = tk.StringVar()
         self.gear_value_var.set(self.gear_value[0])
-        self.gear_value_dropdown = ttk.OptionMenu(self.frame, self.gear_value_var, *self.gear_value, 
+        self.gear_value_dropdown = ttk.OptionMenu(self.frame, self.gear_value_var, self.gear_value[0], *self.gear_value, 
                                              command=lambda value, v=self.gear_value_var, name=f"gear_value": self.on_dropdown_change(v, name))
         self.gear_value_dropdown.grid(row=4, column=3)
 

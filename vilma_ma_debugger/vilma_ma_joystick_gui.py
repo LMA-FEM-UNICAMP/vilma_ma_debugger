@@ -22,7 +22,7 @@ import tkinter as tk
 from tkinter import ttk
 
 
-class VilmaMaStatus(Node):
+class VilmaMaJoystickGui(Node):
     
     def __init__(self):
         super().__init__('vilma_ma_joystick_gui')
@@ -211,7 +211,7 @@ class VilmaMaStatus(Node):
 def main(args=None):
     rclpy.init(args=args)
     
-    vilma_ma_joystick_gui_node = VilmaMaStatus()
+    vilma_ma_joystick_gui_node = VilmaMaJoystickGui()
     
     rclpy.spin(vilma_ma_joystick_gui_node)
     

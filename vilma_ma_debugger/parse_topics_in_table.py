@@ -206,11 +206,18 @@ def get_sensors_rows(sensors):
             i = i + 1
             continue
         
-        if(i == 30):
+        if(30 == i):
             try:
-                sensors_ma_rows.append([Text(sensors_ma_labels[i],style='bright_green'), Text(str(sensors_ma_gear_states[sensors[i]]), style='bright_green')])
+                sensors_ma_rows.append([Text(sensors_ma_labels[i],style='bright_green'), Text(str(sensors_ma_gear_states[int(sensors[i])]), style='bright_green')])
             except:
-                sensors_ma_rows.append([Text(sensors_ma_labels[i],style='bright_green'), Text('--', style='bright_green')])
+                sensors_ma_rows.append([Text(sensors_ma_labels[i],style='bright_green'), Text("--", style='bright_green')])
+                
+        elif(17 == i):
+            try:
+                sensors_ma_rows.append([Text(sensors_ma_labels[i],style='bright_green'), Text(str(joystick_ma_brake_modes[int(sensors[i])]), style='bright_green')])
+            except:
+                sensors_ma_rows.append([Text(sensors_ma_labels[i],style='bright_green'), Text("--", style='bright_green')])
+            
         else:
             try:
                 sensors_ma_rows.append([Text(sensors_ma_labels[i],style='bright_green'), Text("{:.4f}".format(sensors[i])+' '+sensors_ma_units[i], style='bright_green')])

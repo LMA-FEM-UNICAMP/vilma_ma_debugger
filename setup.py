@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'vilma_ma_status = vilma_ma_debugger.vilma_ma_status:main'
+            'vilma_ma_status = vilma_ma_debugger.vilma_ma_status:main',
+            'vilma_ma_joystick_gui = vilma_ma_debugger.vilma_ma_joystick_gui:main'
         ],
     },
 )

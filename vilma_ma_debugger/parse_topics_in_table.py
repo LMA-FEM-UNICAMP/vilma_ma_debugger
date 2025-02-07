@@ -183,10 +183,13 @@ def get_joystick_rows(joy):
                 joy_value = '--'
             
         else:
-            joy_value = joy[i]
+            joy_value = "{:.4f}".format(joy[i])
         
-        joystick_ma_rows.append([Text(joystick_ma_labels[i],style='bright_green'), Text(str(joy_value)+' '+joystick_ma_units[i],style='bright_green')])
-            
+        try:
+            joystick_ma_rows.append([Text(joystick_ma_labels[i],style='bright_green'), Text(str(joy_value)+' '+joystick_ma_units[i],style='bright_green')])
+        except:
+            None
+                
         i = i + 1
         
     return joystick_ma_rows
@@ -209,8 +212,11 @@ def get_sensors_rows(sensors):
             except:
                 sensors_ma_rows.append([Text(sensors_ma_labels[i],style='bright_green'), Text('--', style='bright_green')])
         else:
-            sensors_ma_rows.append([Text(sensors_ma_labels[i],style='bright_green'), Text(str(sensors[i])+' '+sensors_ma_units[i], style='bright_green')])
-
+            try:
+                sensors_ma_rows.append([Text(sensors_ma_labels[i],style='bright_green'), Text("{:.4f}".format(sensors[i])+' '+sensors_ma_units[i], style='bright_green')])
+            except:
+                None
+                
         i = i + 1
         
     return sensors_ma_rows
@@ -224,8 +230,11 @@ def get_state_rows(state):
     i = 0
     while i < len(state):
         
-        state_ma_rows.append([Text(state_ma_labels[i],style='bright_green'), Text(str(state[i])+' '+state_ma_units[i], style='bright_green')])
-
+        try:
+            state_ma_rows.append([Text(state_ma_labels[i],style='bright_green'), Text("{:.4f}".format(state[i])+' '+state_ma_units[i], style='bright_green')])
+        except:
+            None
+            
         i = i + 1
         
     return state_ma_rows

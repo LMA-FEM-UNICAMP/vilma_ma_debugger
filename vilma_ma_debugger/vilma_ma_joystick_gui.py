@@ -32,7 +32,7 @@ class VilmaMaJoystickGui(Node):
         self.joystick_msg = Float64MultiArray()
         self.joystick_msg.data = [0.0]*10
         
-        self.joystick_msg.data[1] = 2.0e3
+        self.joystick_msg.data[1] = 60*5*1000
         
         
         self.steer_modes = ["Off", "Velocity", "Position", "Voltage", "Find zero"]
@@ -46,7 +46,7 @@ class VilmaMaJoystickGui(Node):
 
         self.root = tk.Tk()
         self.root.title("VILMA MA Joystick GUI")
-        self.root.geometry("600x300")
+        self.root.geometry("600x330")
 
         # Create sliders
 
@@ -127,7 +127,7 @@ class VilmaMaJoystickGui(Node):
         self.joystick_msg.data[5] = self.steer_slider.get()
         self.joystick_msg.data[7] = self.gas_slider.get()
         
-        self.joystick_msg.data[0] = float(self.get_clock().now().to_msg().sec*1.0e9 + self.get_clock().now().to_msg().nanosec)
+        self.joystick_msg.data[0] = float(self.get_clock().now().to_msg().sec + self.get_clock().now().to_msg().nanosec*1.0e-9)
         self.joystick_ma_pub_.publish(self.joystick_msg)
         
 
@@ -201,7 +201,7 @@ class VilmaMaJoystickGui(Node):
             
             self.joystick_msg.data[9] = value
         
-        self.joystick_msg.data[0] = float(self.get_clock().now().to_msg().sec*1.0e9 + self.get_clock().now().to_msg().nanosec)
+        self.joystick_msg.data[0] = float(self.get_clock().now().to_msg().sec + self.get_clock().now().to_msg().nanosec*1.0e-9)
         self.joystick_ma_pub_.publish(self.joystick_msg)
                 
         

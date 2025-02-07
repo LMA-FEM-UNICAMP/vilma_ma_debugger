@@ -50,7 +50,7 @@ class VilmaMaJoystickGui(Node):
 
         # Create sliders
 
-        self.steer_slider = tk.Scale(self.root, from_=-1, to=1, resolution=0.01, orient='horizontal', label="Steering")
+        self.steer_slider = tk.Scale(self.root, from_=1, to=-1, resolution=0.01, orient='horizontal', label="Steering")
         self.steer_slider.pack(fill='x')
         self.steer_slider.set(0)
         self.steer_slider.config(command=self.slider_update)

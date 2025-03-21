@@ -34,21 +34,21 @@ class VilmaMaStatus(Node):
         
         self.sensors_ma_sub_ = self.create_subscription(
             Float64MultiArray,
-            '/vilma_ma_ros/sensors_ma',
+            '/vilma_ma_debug/sensors_ma',
             self.sensors_ma_callback,
             1)
         self.sensors_ma_sub_
         
         self.state_ma_sub_ = self.create_subscription(
             Float64MultiArray,
-            '/vilma_ma_ros/state_ma',
+            '/vilma_ma_debug/state_ma',
             self.state_ma_callback,
             1)
         self.state_ma_sub_
         
         self.joystick_ma_sub_ = self.create_subscription(
             Float64MultiArray,
-            '/vilma_ma_ros/joystick_ma',
+            '/vilma_ma_debug/joystick_ma',
             self.joystick_ma_callback,
             1)
         self.joystick_ma_sub_

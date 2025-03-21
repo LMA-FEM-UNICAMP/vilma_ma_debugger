@@ -27,7 +27,7 @@ class VilmaMaJoystickGui(Node):
     def __init__(self):
         super().__init__('vilma_ma_joystick_gui')
         
-        self.joystick_ma_pub_ = self.create_publisher(Float64MultiArray, '/vilma_ma_ros/joystick_ma', 1)
+        self.joystick_ma_pub_ = self.create_publisher(Float64MultiArray, '/vilma_ma_debug/joystick_ma', 1)
 
         self.joystick_msg = Float64MultiArray()
         self.joystick_msg.data = [0.0]*10

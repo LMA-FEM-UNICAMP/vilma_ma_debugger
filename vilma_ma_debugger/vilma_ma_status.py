@@ -27,28 +27,40 @@ class VilmaMaStatus(Node):
         super().__init__('vilma_ma_status')
         
         self.declare_parameter('update_period', 0.3)
+        self.declare_parameter('ma_communication', 'udp')
         
         timer_period = self.get_parameter('update_period').value
+        ma_communication = self.get_parameter('ma_communication').value
         
         self.timer = self.create_timer(timer_period, self.timer_callback)
         
+        if ('udp' == ma_communication):
+            sensors_ma_topic = '/vilma_ma_debug/sensors_ma'
+            state_ma_topic = '/vilma_ma_debug/state_ma'
+            joystick_ma_topic = '/vilma_ma_debug/joystick_ma'
+        elif ('bridge' == ma_communication):
+            sensors_ma_topic = '/vilma_ma_ros/sensors_ma'
+            state_ma_topic = '/vilma_ma_ros/state_ma'
+            joystick_ma_topic = '/vilma_ma_ros/joystick_ma'
+        
+        
         self.sensors_ma_sub_ = self.create_subscription(
             Float64MultiArray,
-            '/vilma_ma_debug/sensors_ma',
+            sensors_ma_topic,
             self.sensors_ma_callback,
             1)
         self.sensors_ma_sub_
         
         self.state_ma_sub_ = self.create_subscription(
             Float64MultiArray,
-            '/vilma_ma_debug/state_ma',
+            state_ma_topic,
             self.state_ma_callback,
             1)
         self.state_ma_sub_
         
         self.joystick_ma_sub_ = self.create_subscription(
             Float64MultiArray,
-            '/vilma_ma_debug/joystick_ma',
+            joystick_ma_topic,
             self.joystick_ma_callback,
             1)
         self.joystick_ma_sub_

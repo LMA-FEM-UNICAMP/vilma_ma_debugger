@@ -41,11 +41,11 @@ class VilmaMaJoystickGui(Node):
         self.joystick_msg = Float64MultiArray()
         self.joystick_msg.data = [0.0]*10
         
-        self.joystick_msg.data[1] = 60*5*1000
+        self.joystick_msg.data[1] = 400 # 60*5*1000
         
         
         self.steer_modes = ["Off", "Velocity", "Position", "Voltage", "Find zero"]
-        self.gas_modes   = ["Off", "Pedal speed", "Pedal position"]
+        self.gas_modes   = ["Off", "Pedal speed (Disabled)", "Pedal position"]
         self.brake_modes = ["Off", "Percentage"]
         self.gear_modes  = ["Off", "N", "R", "D"]
         self.gear_value  = ["-", "+", "Auto/Manual"]
@@ -167,7 +167,7 @@ class VilmaMaJoystickGui(Node):
                 value = 0
                 
             elif(var.get() == self.gas_modes[1]):
-                value = 1
+                value = 0 # ! Pedal speed disabled
                 
             elif(var.get() == self.gas_modes[2]):
                 value = 2

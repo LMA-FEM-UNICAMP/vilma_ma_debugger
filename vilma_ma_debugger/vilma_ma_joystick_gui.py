@@ -19,8 +19,8 @@ from std_msgs.msg import Float64MultiArray
 
 
 import tkinter as tk
-from tkinter import ttk
-
+from tkinter import ttk, Toplevel
+import threading
 
 class VilmaMaJoystickGui(Node):
     
@@ -28,13 +28,17 @@ class VilmaMaJoystickGui(Node):
         super().__init__('vilma_ma_joystick_gui')
         
         self.declare_parameter('ma_communication', 'udp')
+        self.declare_parameter('publish_rate', 10)
         
         ma_communication = self.get_parameter('ma_communication').value
+        publish_period = 1.0/(self.get_parameter('publish_rate').value)
         
         if ('udp' == ma_communication):
             joystick_ma_topic = '/vilma_ma_debug/joystick_ma'
         elif ('bridge' == ma_communication):
             joystick_ma_topic = '/vilma_ma_ros/joystick_ma'
+        
+        self.publish_data = self.create_timer(publish_period, self.publish_callback)
         
         self.joystick_ma_pub_ = self.create_publisher(Float64MultiArray, joystick_ma_topic, 1)
 
@@ -43,14 +47,23 @@ class VilmaMaJoystickGui(Node):
         
         self.joystick_msg.data[1] = 400 # 60*5*1000
         
-        
         self.steer_modes = ["Off", "Velocity", "Position", "Voltage", "Find zero"]
         self.gas_modes   = ["Off", "Pedal speed (Disabled)", "Pedal position"]
         self.brake_modes = ["Off", "Percentage"]
         self.gear_modes  = ["Off", "N", "R", "D"]
         self.gear_value  = ["-", "+", "Auto/Manual"]
 
-
+        # Create GUI
+        self.command_gui()
+        
+    def publish_callback(self):
+        
+        self.root.update()
+        
+        self.joystick_msg.data[0] = float(self.get_clock().now().to_msg().sec + self.get_clock().now().to_msg().nanosec*1.0e-9)
+        self.joystick_ma_pub_.publish(self.joystick_msg)
+        
+    def command_gui(self):
         # Create GUI
 
         self.root = tk.Tk()
@@ -124,23 +137,12 @@ class VilmaMaJoystickGui(Node):
         self.gear_value_dropdown = ttk.OptionMenu(self.frame, self.gear_value_var, self.gear_value[0], *self.gear_value, 
                                              command=lambda value, v=self.gear_value_var, name=f"gear_value": self.on_dropdown_change(v, name))
         self.gear_value_dropdown.grid(row=4, column=3)
-
-
-        self.root.mainloop()
-        
-        
         
     def slider_update(self,*args):
         
         self.joystick_msg.data[3] = self.brake_slider.get()
         self.joystick_msg.data[5] = self.steer_slider.get()
         self.joystick_msg.data[7] = self.gas_slider.get()
-        
-        self.joystick_msg.data[0] = float(self.get_clock().now().to_msg().sec + self.get_clock().now().to_msg().nanosec*1.0e-9)
-        self.joystick_ma_pub_.publish(self.joystick_msg)
-        
-
-    # Callback function for _dropdown selections
 
     def on_dropdown_change(self, var, dropdown_name):
         
@@ -149,13 +151,13 @@ class VilmaMaJoystickGui(Node):
                 value = 0
                 
             elif(var.get() == self.steer_modes[1]):
-                value = 1
+                value = 0 # ! 1 Steering speed disabled
                 
             elif(var.get() == self.steer_modes[2]):
                 value = 2
                 
             elif(var.get() == self.steer_modes[3]):
-                value = 3
+                value = 0 # ! 3 Steering voltage disabled
                 
             elif(var.get() == self.steer_modes[4]):
                 value = 4
@@ -167,7 +169,7 @@ class VilmaMaJoystickGui(Node):
                 value = 0
                 
             elif(var.get() == self.gas_modes[1]):
-                value = 0 # ! Pedal speed disabled
+                value = 0 # ! 1 Pedal speed disabled
                 
             elif(var.get() == self.gas_modes[2]):
                 value = 2
@@ -210,8 +212,8 @@ class VilmaMaJoystickGui(Node):
             
             self.joystick_msg.data[9] = value
         
-        self.joystick_msg.data[0] = float(self.get_clock().now().to_msg().sec + self.get_clock().now().to_msg().nanosec*1.0e-9)
-        self.joystick_ma_pub_.publish(self.joystick_msg)
+        # self.joystick_msg.data[0] = float(self.get_clock().now().to_msg().sec + self.get_clock().now().to_msg().nanosec*1.0e-9)
+        # self.joystick_ma_pub_.publish(self.joystick_msg)
                 
         
 
